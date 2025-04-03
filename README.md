@@ -2,8 +2,8 @@
 Integrantes do projeto
 - **Suelen Marinho:** RGM: 31923160
 - **Lelton Borges:** RGM: 27933091
-- **Eduardo:** RGM:
-- **Raquel:** RGM:
+- **Eduardo Soares:** RGM: 28077733
+- **Raquel de Almeida:** RGM: 27518159
 # Implementar e analisar o impacto da evolução computacional em soluções práticas
 # Objetivo
 Integrar a teoria da evolução das máquinas computacionais com a prática de implementação de soluções, promovendo uma análise crítica do impacto dessas tecnologias. 
