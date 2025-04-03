@@ -39,51 +39,46 @@ de senhas, mas na verdade eram 8,4 bilhões de senha, de acordo com Altieres Roh
 - **Linkedin:** O caso ocorreu em 2012, o Linkedin sofreu um ataque cibernético e foi vazado credenciais profissionais, acreditavam que teria sido vazado cerca de 6,5 milhões de
 credenciais de acessos, porém em 2016 foi descoberto que 167 milhões de contas foram afetadas.
 # Mecanismos de Autenticação
-A autenticação é o processo de verificar a autenticidade de uma entidade em relação a um sistema ou algoritmo. Esse mecanismo comprova que as informações fornecidas estão verdadeiramente associadas à entidade em questão e que são verídicas. A autenticação pode ser aplicada em diferentes contextos, como:
-- Identificação de um usuário.
-- Troca de informações entre máquinas.
-- Validação da origem dos dados em uma página web.
-## Evolução da Autenticação
-Inicialmente, a autenticação visava apenas identificar usuários, garantindo que somente aqueles registrados tivessem acesso ao sistema. Com o tempo, tornou-se necessário também identificar o sistema para o usuário, especialmente em casos de acesso por rede. Exemplos:
-- **Acesso a serviços bancários**: O usuário precisa ter certeza de que o sistema acessado é realmente o do banco desejado.
-- **Instalação de componentes de software**: O sistema operacional deve garantir que o software instalado provenha de uma fonte confiável.
-## Controle de Acesso e Auditoria
-Para implementar técnicas de controle de acesso e auditorias, cada processo deve ser associado a seu respectivo usuário através de um **identificador de usuário (UID)**. Características:
-- Geralmente um número inteiro usado como chave em uma tabela de usuários cadastrados (ex: `/etc/passwd` em sistemas UNIX).
-- Recursos podem estar disponíveis abertamente (ex: pastas públicas ou páginas web públicas).
-## Estratégias de Autenticação
-As técnicas de autenticação podem ser classificadas em três grupos:
-### 1. SYK – *Something You Know* ("algo que você sabe")
-- Baseadas em informações conhecidas pelo usuário (ex: login e senha).
-- **Vantagem**: Simples de implementar.
-- **Desvantagem**: Fraca, pois a informação pode ser facilmente compartilhada ou roubada.
-### 2. SYH – *Something You Have* ("algo que você tem")
-- Baseadas na posse de algo físico ou digital (ex: certificado digital, smartcard, cartão magnético).
-- **Vantagem**: Mais robusta que SYK.
-- **Desvantagem**: Dispositivos podem ser roubados ou copiados.
-### 3. SYA – *Something You Are* ("algo que você é")
-- Baseadas em características biométricas (ex: impressão digital, íris, voz).
-- **Vantagem**: Potencialmente mais robusta.
-- **Desvantagem**: Complexa de implementar.
 
-## Infraestruturas de Autenticação
+A autenticação é o processo de verificar a autenticidade de uma entidade em relação a um sistema ou algoritmo. Esse mecanismo comprova que as informações fornecidas estão verdadeiramente associadas à entidade em questão e que são verídicas. A autenticação pode ser aplicada em diferentes contextos, como a identificação de um usuário, a troca de informações entre máquinas ou a validação da origem dos dados em uma página web, entre outros exemplos.
 
-Para centralizar e padronizar os métodos de autenticação, surgiram as **infraestruturas de autenticação**, que oferecem:
+No início, a autenticação visava apenas identificar usuários, garantindo que somente aqueles registrados tivessem acesso ao sistema. Com o passar do tempo, tornou-se necessário também identificar o sistema para o usuário, especialmente em casos de acesso por rede. Quando um usuário acessa um serviço bancário via internet, ele precisa ter certeza de que o sistema acessado é realmente o do banco desejado, e não uma página falsa criada para roubar dados bancários. Outro exemplo ocorre durante a instalação de componentes de software, como drivers, que podem acessar camadas mais sensíveis do sistema. Nesse caso, o sistema operacional deve garantir que o software instalado provenha de uma fonte confiável.
 
-- Interface de programação unificada para todos os serviços.
-- Uso consistente das mesmas credenciais.
-- Compatibilidade automática com novas técnicas de autenticação.
+Com a evolução da tecnologia, diversos mecanismos de segurança foram implementados para garantir a confidencialidade e integridade dos dados. Dessa forma, as informações são mantidas em sigilo, protegidas contra acessos não autorizados, e disponíveis apenas às partes devidamente autorizadas.
 
-### Principais Infraestruturas
+Para permitir a implementação das técnicas de controle de acesso e auditorias, cada processo deve ser associado a seu respectivo usuário através de um identificador de usuário (UID – User Identifier), geralmente um número inteiro usado como chave em uma tabela de usuários cadastrados (como o arquivo /etc/passwd dos sistemas UNIX). Normalmente, somente usuários devidamente autenticados podem ter acesso aos recursos de um sistema. Todavia, alguns recursos podem estar disponíveis abertamente, como é o caso de pastas de arquivos públicas em rede e páginas em um servidor Web público.
 
-| Nome         | Descrição                                                                                | Sistemas/SO Associados         |
-| ------------ | ---------------------------------------------------------------------------------------- | ------------------------------ |
-| **PAM**      | Módulos de autenticação plugáveis.                                                       | Solaris, Linux, FreeBSD, macOS |
-| **XSSO**     | Extensão do PAM para padronização (*Single Sign-On*).                                    | Pouco utilizada.               |
-| **BSD Auth** | Autenticação por processos separados (princípio do privilégio mínimo).                   | OpenBSD                        |
-| **NSS**      | Define bases de dados para serviços do sistema (incluindo autenticação).                 | Sistemas UNIX                  |
-| **GSSAPI**   | Padrão de API para serviços de segurança (autenticação, confidencialidade, integridade). | Multiplataforma                |
-| **SSPI**     | Variante proprietária da GSSAPI para Windows.                                            | Windows                        |
+## Estratégias de autenticação
+
+As técnicas usadas para a autenticação de um usuário podem ser classificadas em três grandes grupos:
+
+### SYK – Something You Know ("algo que você sabe")
+Estas técnicas de autenticação são baseadas em informações conhecidas pelo usuário, como seu nome de login e sua senha. São consideradas técnicas de autenticação fracas, pois a informação necessária para a autenticação pode ser facilmente comunicada a outras pessoas, ou mesmo roubada.
+
+### SYH – Something You Have ("algo que você tem")
+São técnicas que se baseiam na posse de alguma informação mais complexa, como um certificado digital ou uma chave criptográfica, ou algum dispositivo material, como um smartcard, um cartão magnético, um código de barras, etc. Embora sejam mais robustas que as técnicas SYK, estas técnicas também têm seus pontos fracos, pois dispositivos materiais, como cartões, também podem ser roubados ou copiados.
+
+### SYA – Something You Are ("algo que você é")
+Se baseiam em características intrinsecamente associadas ao usuário, como seus dados biométricos: impressão digital, padrão da íris, timbre de voz, etc. São técnicas mais complexas de implementar, mas são potencialmente mais robustas que as anteriores.
+
+## Infraestruturas de autenticação
+
+Como a autenticação é necessária em diversos serviços de um sistema, desde sessões de terminal até serviços de rede, como e-mail, bancos de dados e terminais gráficos remotos. Historicamente, cada método de acesso possuía seu próprio mecanismo de autenticação, com regras e estruturas de dados específicas. Essa fragmentação dificultava a criação de novos serviços, já que cada um precisava implementar seu próprio sistema de autenticação do zero.
+
+Para solucionar esse problema, surgiram as infraestruturas de autenticação (authentication frameworks), que centralizam e padronizam os métodos de autenticação. Esses sistemas oferecem:
+
+- Uma interface de programação unificada para todos os serviços;
+- O uso consistente das mesmas credenciais (como pares login/senha, dados biométricos ou certificados digitais);
+- Compatibilidade automática com novas técnicas de autenticação, sem necessidade de adaptação individual em cada serviço.
+
+As principais infraestruturas de autenticação em uso nos sistemas operacionais atuais são:
+
+- **PAM (Pluggable Authentication Modules)**: proposto inicialmente para o sistema Solaris, foi depois adotado em vários outros sistemas UNIX, como FreeBSD, NetBSD, MacOS X e Linux;
+- **XSSO (X/Open Single Sign-On)**: é uma tentativa de extensão e padronização do sistema PAM, ainda pouco utilizada;
+- **BSD Auth**: usada no sistema operacional OpenBSD; cada método de autenticação é implementado como um processo separado, respeitando o princípio do privilégio mínimo;
+- **NSS (Name Services Switch)**: infraestrutura usada em sistemas UNIX para definir as bases de dados a usar para vários serviços do sistema operacional, inclusive a autenticação;
+- **GSSAPI (Generic Security Services API)**: padrão de API para acesso a serviços de segurança, como autenticação, confidencialidade e integridade de dados;
+- **SSPI (Security Support Provider Interface)**: variante proprietária da GSSAPI, específica para plataformas Windows.
 
 ## Referências 
 
